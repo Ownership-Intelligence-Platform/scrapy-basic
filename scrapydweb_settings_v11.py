@@ -13,7 +13,7 @@ import os
 ############################## QUICK SETUP start ##############################
 ############################## 快速设置 开始 ###################################
 # Setting SCRAPYDWEB_BIND to '0.0.0.0' or IP-OF-THE-CURRENT-HOST would make
-# ScrapydWeb server visible externally; Otherwise, set it to '127.0.0.1'.
+# ScrapydWeb server visible externally; Otherwise, set it to '0.0.0.0'.
 # The default is '0.0.0.0'.
 SCRAPYDWEB_BIND = '0.0.0.0'
 # Accept connections on the specified port, the default is 8805.
@@ -39,17 +39,17 @@ PASSWORD = ''
 # - the string format: username:password@ip:port#group
 #   - The default port would be 8800 if not provided,
 #   - Both basic auth and group are optional.
-#   - e.g. '127.0.0.1:8800' or 'username:password@localhost:6801#group'
+#   - e.g. '0.0.0.0:8800' or 'username:password@localhost:6801#group'
 # - the tuple format: (username, password, ip, port, group)
 #   - When the username, password, or group is too complicated (e.g. contains ':@#'),
 #   - or if ScrapydWeb fails to parse the string format passed in,
 #   - it's recommended to pass in a tuple of 5 elements.
-#   - e.g. ('', '', '127.0.0.1', '8800', '') or ('username', 'password', 'localhost', '6801', 'group')
+#   - e.g. ('', '', '0.0.0.0', '8800', '') or ('username', 'password', 'localhost', '6801', 'group')
 # Minimal local setup: keep only the local Scrapyd instance.
 # Start it first in a separate terminal with:  scrapyd
 # Add more servers later (e.g. 'user:pass@remotehost:8800#group').
 SCRAPYD_SERVERS = [
-    '127.0.0.1:8800',
+    '0.0.0.0:8800',
 ]
 
 # The default is True, set it to False to skip checking connectivity of scrapyd at startup.
@@ -64,8 +64,8 @@ CHECK_SCRAPYD_SERVERS = False
 # If both ScrapydWeb and one of your Scrapyd servers run on the same machine,
 # ScrapydWeb would try to directly read Scrapy logfiles from disk, instead of making a request
 # to the Scrapyd server.
-# e.g. '127.0.0.1:8800' or 'localhost:6801', do not forget the port number.
-LOCAL_SCRAPYD_SERVER = '127.0.0.1:8800'
+# e.g. '0.0.0.0:8800' or 'localhost:6801', do not forget the port number.
+LOCAL_SCRAPYD_SERVER = '0.0.0.0:8800'
 
 # Enter the directory when you run Scrapyd, run the command below
 # to find out where the Scrapy logs are stored:
@@ -409,8 +409,8 @@ DATA_PATH = os.environ.get('DATA_PATH', '')
 # To use MySQL backend, run command: pip install --upgrade pymysql
 # To use PostgreSQL backend, run command: pip install --upgrade psycopg2
 # e.g.
-# 'mysql://username:password@127.0.0.1:3306'
-# 'postgresql://username:password@127.0.0.1:5432'
+# 'mysql://username:password@0.0.0.0:3306'
+# 'postgresql://username:password@0.0.0.0:5432'
 # 'sqlite:///C:/Users/username'
 # 'sqlite:////home/username'
 DATABASE_URL = os.environ.get('DATABASE_URL', '')
