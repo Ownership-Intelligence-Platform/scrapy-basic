@@ -1,2 +1,10 @@
 .venv
 __pycache__/
+# Scrapyd artifacts
+logs/
+eggs/
+items/
+dbs/
+*.egg-info/
+scrapydweb_data/
+scrapydweb_cache/
