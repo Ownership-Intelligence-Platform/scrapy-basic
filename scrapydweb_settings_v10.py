@@ -6,11 +6,11 @@ Adjust values as needed; restart ScrapydWeb after changes.
 
 # List of Scrapyd server base URLs (must end with / if using trailing slash semantics)
 SCRAPYD_SERVERS = [
-    'http://127.0.0.1:6800',
+    'http://127.0.0.1:8800',
 ]
 
 # Default server where new actions apply if not specified
-SCRAPYD_DEFAULT = 'http://127.0.0.1:6800'
+SCRAPYD_DEFAULT = 'http://127.0.0.1:8800'
 
 # Timezone for UI display (use tz database names, e.g. 'UTC', 'Asia/Shanghai')
 TIMEZONE = 'UTC'
@@ -33,4 +33,4 @@ DEBUG = False
 # Notes:
 # - Run `scrapyd` in a separate terminal before starting ScrapydWeb.
 # - Deploy: `scrapyd-deploy default -p basic_spider`
-# - Schedule via UI or: curl http://127.0.0.1:6800/schedule.json -d project=basic_spider -d spider=quotes
+# - Schedule via UI or: curl http://127.0.0.1:8800/schedule.json -d project=basic_spider -d spider=quotes

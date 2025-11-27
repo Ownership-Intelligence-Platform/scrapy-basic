@@ -46,7 +46,7 @@ pip install -r requirements.txt
 scrapyd
 ```
 
-By default it listens on `http://127.0.0.1:6800/` (configured in `scrapy.cfg`). Leave this terminal running.
+By default it listens on `http://127.0.0.1:8800/` (configured in `scrapy.cfg`). Leave this terminal running.
 
 ### 3. Start ScrapydWeb (management UI)
 
@@ -56,7 +56,7 @@ In a new terminal (same virtual environment):
 scrapydweb
 ```
 
-Access the UI at the URL printed (usually `http://127.0.0.1:5000`). It will auto-detect the local Scrapyd server via `SCRAPYD_SERVERS` in `scrapydweb_settings_v10.py`.
+Access the UI at the URL printed (usually `http://127.0.0.1:8805`). It will auto-detect the local Scrapyd server via `SCRAPYD_SERVERS` in `scrapydweb_settings_v10.py`.
 
 ### 4. Deploy the project to Scrapyd
 
@@ -83,13 +83,13 @@ Via ScrapydWeb UI (recommended) or with an HTTP call:
 Schedule the `sina_finance` spider (UI recommended). Example via API:
 
 ```powershell
-Invoke-RestMethod -Uri "http://127.0.0.1:6800/schedule.json" -Method Post -Body @{ project='basic_spider'; spider='sina_finance' }
+Invoke-RestMethod -Uri "http://127.0.0.1:8800/schedule.json" -Method Post -Body @{ project='basic_spider'; spider='sina_finance' }
 ```
 
 Or schedule the quotes spider:
 
 ```powershell
-Invoke-RestMethod -Uri "http://127.0.0.1:6800/schedule.json" -Method Post -Body @{ project='basic_spider'; spider='quotes' }
+Invoke-RestMethod -Uri "http://127.0.0.1:8800/schedule.json" -Method Post -Body @{ project='basic_spider'; spider='quotes' }
 ```
 
 ### 6. Monitor jobs & logs
@@ -105,8 +105,8 @@ Use ScrapydWeb to view running/completed jobs, tail logs, and download items.
 ### 7. Common maintenance
 
 - Re-deploy after changing spider code: `scrapyd-deploy default -p basic_spider`
-- List versions: `curl http://127.0.0.1:6800/listversions.json?project=basic_spider`
-- Delete old version: `curl http://127.0.0.1:6800/delversion.json -d project=basic_spider -d version=<ver>`
+- List versions: `curl http://127.0.0.1:8800/listversions.json?project=basic_spider`
+- Delete old version: `curl http://127.0.0.1:8800/delversion.json -d project=basic_spider -d version=<ver>`
 
 ### 8. Authentication (optional)
 
