@@ -43,8 +43,8 @@ class SinaFinanceSpider(scrapy.Spider):
                 continue
 
             # Simple heuristic: keep URLs that look like news articles.
-            # Many Sina news URLs contain year (202x) or 'doc'/'roll' in the path.
-            if "/202" not in full_url and "doc" not in full_url and "roll" not in full_url:
+            # Many Sina news URLs contain year (20xx) or 'doc'/'roll', or live in stock/money sections.
+            if not any(key in full_url for key in ("/202", "/20", "doc", "roll", "/stock/", "/money/", "/china/")):
                 continue
 
             yield scrapy.Request(full_url, callback=self.parse_article)

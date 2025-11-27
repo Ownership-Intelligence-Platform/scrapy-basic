@@ -96,6 +96,12 @@ Invoke-RestMethod -Uri "http://127.0.0.1:6800/schedule.json" -Method Post -Body 
 
 Use ScrapydWeb to view running/completed jobs, tail logs, and download items.
 
+### Where are my outputs saved?
+
+- When scheduled from ScrapydWeb or API, outputs are saved under `items/<project>/<spider>/<job>.json`.
+- When run locally via CLI without `-O/-o`, the project’s default FEEDS save to `items/<spider>/<time>.json`.
+- You can override the destination by passing `-d setting=FEED_URI=...` in ScrapydWeb’s Additional field.
+
 ### 7. Common maintenance
 
 - Re-deploy after changing spider code: `scrapyd-deploy default -p basic_spider`
