@@ -8,3 +8,4 @@ dbs/
 *.egg-info/
 scrapydweb_data/
 scrapydweb_cache/
+build/

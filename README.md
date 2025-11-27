@@ -60,15 +60,33 @@ Access the UI at the URL printed (usually `http://127.0.0.1:5000`). It will auto
 
 ### 4. Deploy the project to Scrapyd
 
+Choose one of the two deployment methods:
+
+Method A – from terminal (builds egg automatically):
+
 ```powershell
 scrapyd-deploy default -p basic_spider
 ```
 
-This uploads an egg to Scrapyd. Verify in ScrapydWeb under the project list.
+Method B – via ScrapydWeb (uses `SCRAPY_PROJECTS_DIR`):
+
+1. Open ScrapydWeb UI
+2. Go to Deploy page
+3. Select `basic_spider` project and press Deploy
+
+This uploads the project to Scrapyd. Verify in ScrapydWeb under the project list. The spider list should now include `quotes` and `sina_finance`.
 
 ### 5. Schedule a spider run
 
 Via ScrapydWeb UI (recommended) or with an HTTP call:
+
+Schedule the `sina_finance` spider (UI recommended). Example via API:
+
+```powershell
+Invoke-RestMethod -Uri "http://127.0.0.1:6800/schedule.json" -Method Post -Body @{ project='basic_spider'; spider='sina_finance' }
+```
+
+Or schedule the quotes spider:
 
 ```powershell
 Invoke-RestMethod -Uri "http://127.0.0.1:6800/schedule.json" -Method Post -Body @{ project='basic_spider'; spider='quotes' }

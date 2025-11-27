@@ -99,7 +99,18 @@ PRIVATEKEY_FILEPATH = ''
 # ScrapydWeb is able to locate projects in the SCRAPY_PROJECTS_DIR,
 # so that you can simply select a project to deploy, instead of packaging it in advance.
 # e.g. 'C:/Users/username/myprojects' or '/home/username/myprojects'
-SCRAPY_PROJECTS_DIR = ''
+# Allow ScrapydWeb to auto-detect local projects for one-click deploy.
+import os as _os
+# IMPORTANT: ScrapydWeb expects SCRAPY_PROJECTS_DIR to contain one or more
+# subdirectories, each being a Scrapy project (i.e. each subdirectory has its
+# own scrapy.cfg). Our project root `scrapy-basic` itself holds scrapy.cfg, so
+# pointing SCRAPY_PROJECTS_DIR to the project root results in "No projects found".
+# Fix: set SCRAPY_PROJECTS_DIR to the parent folder so `scrapy-basic` appears as
+# a child candidate.
+SCRAPY_PROJECTS_DIR = _os.path.abspath('..')
+## Example layout now scanned:
+# <parent>
+#   scrapy-basic/  (contains scrapy.cfg -> detected as project `basic_spider`)
 
 
 ############################## Scrapyd ########################################
