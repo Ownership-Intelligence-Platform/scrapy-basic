@@ -192,7 +192,13 @@ SCHEDULE_DOWNLOAD_DELAY = None
 # The default is "-d setting=CLOSESPIDER_TIMEOUT=60\r\n-d setting=CLOSESPIDER_PAGECOUNT=10\r\n-d arg1=val1",
 # set it to '' or any non-empty string to customize the default value of `additional`.
 # Use '\r\n' as the line separator.
-SCHEDULE_ADDITIONAL = "-d setting=CLOSESPIDER_TIMEOUT=60\r\n-d setting=CLOSESPIDER_PAGECOUNT=10\r\n-d arg1=val1"
+# Default additional params applied when scheduling from the UI.
+# Configure a JSON feed stored by Scrapyd so each job produces an output file visible in Items page.
+SCHEDULE_ADDITIONAL = (
+    "-d setting=FEED_URI=items/%(project)s/%(spider)s/%(job)s.json\r\n"
+    "-d setting=FEED_FORMAT=json\r\n"
+    "-d setting=FEED_EXPORT_ENCODING=utf-8"
+)
 
 
 ############################## Page Display ###################################

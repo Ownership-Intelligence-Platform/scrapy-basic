@@ -18,6 +18,8 @@ class SinaFinanceSpider(scrapy.Spider):
     custom_settings = {
         "DOWNLOAD_DELAY": 1,
         "CONCURRENT_REQUESTS_PER_DOMAIN": 4,
+        # Disable robots.txt obey for this spider; many news portals disallow crawling.
+        "ROBOTSTXT_OBEY": False,
     }
 
     def parse(self, response):
