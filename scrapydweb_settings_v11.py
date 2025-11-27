@@ -72,13 +72,21 @@ LOCAL_SCRAPYD_SERVER = '127.0.0.1:6800'
 # python -c "from os.path import abspath, isdir; from scrapyd.config import Config; path = abspath(Config().get('logs_dir')); print(path); print(isdir(path))"
 # Check out https://scrapyd.readthedocs.io/en/stable/config.html#logs-dir for more info.
 # e.g. 'C:/Users/username/logs' or '/home/username/logs'
-LOCAL_SCRAPYD_LOGS_DIR = ''
+# Point to the local Scrapyd logs directory so ScrapydWeb can read logs/items directly from disk.
+# Use a path relative to this config file to keep it portable across machines.
+try:
+    _BASE_DIR = _os.path.abspath(_os.path.dirname(__file__))
+    LOCAL_SCRAPYD_LOGS_DIR = _os.path.join(_BASE_DIR, 'logs')
+except Exception:
+    # Fallback to current working directory
+    LOCAL_SCRAPYD_LOGS_DIR = 'logs'
 
 # The default is False, set it to True to automatically run LogParser as a subprocess at startup.
 # Note that you can run the LogParser service separately via command 'logparser' as you like.
 # Run 'logparser -h' to find out the config file of LogParser for more advanced settings.
 # Visit https://github.com/my8100/logparser for more info.
-ENABLE_LOGPARSER = False
+# Optional: enable built-in LogParser to improve stats/Items discovery
+ENABLE_LOGPARSER = True
 ############################## QUICK SETUP end ################################
 ############################## 快速设置 结束 ###################################
 

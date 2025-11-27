@@ -18,10 +18,20 @@ FEED_EXPORT_ENCODING = "utf-8"
 # Files will appear under items/<spider>/<timestamp>.json relative to the working dir.
 # Can be overridden by FEED_URI/FEED_FORMAT arguments when scheduling from ScrapydWeb.
 import os
+# Prefer per-job stable filenames when running under Scrapyd/ScrapydWeb which sets SCRAPY_JOB.
+_job = os.environ.get("SCRAPY_JOB")
+_project = os.environ.get("SCRAPY_PROJECT", "basic_spider")
+_feed_uri_default = (
+    f"items/{_project}/%(name)s/{_job}.json" if _job else "items/%(name)s/%(time)s.json"
+)
 FEEDS = {
-    os.environ.get("SCRAPY_FEED_URI", "items/%(name)s/%(time)s.json"): {
+    os.environ.get("SCRAPY_FEED_URI", _feed_uri_default): {
         "format": os.environ.get("SCRAPY_FEED_FORMAT", "json"),
         "encoding": "utf-8",
         "indent": 2,
     }
 }
+
+# Sensible defaults; can be overridden per-spider or via ScrapydWeb Additional settings.
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118 Safari/537.36"
+CONCURRENT_REQUESTS = 8
