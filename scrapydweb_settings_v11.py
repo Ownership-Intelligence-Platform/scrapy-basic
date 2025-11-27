@@ -16,8 +16,8 @@ import os
 # ScrapydWeb server visible externally; Otherwise, set it to '127.0.0.1'.
 # The default is '0.0.0.0'.
 SCRAPYDWEB_BIND = '0.0.0.0'
-# Accept connections on the specified port, the default is 5000.
-SCRAPYDWEB_PORT = 5000
+# Accept connections on the specified port, the default is 8805.
+SCRAPYDWEB_PORT = 8805
 
 # The default is False, set it to True to enable basic auth for the web UI.
 ENABLE_AUTH = False
