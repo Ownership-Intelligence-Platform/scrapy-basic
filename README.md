@@ -18,6 +18,14 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+### Enable Playwright browsers
+
+If you plan to crawl JavaScript-rendered pages with `scrapy-playwright`, install the browser binaries once:
+
+```powershell
+python -m playwright install
+```
+
 ## Run the spider
 
 From the project root (where `scrapy.cfg` is located), run:
@@ -27,6 +35,16 @@ scrapy crawl quotes -O quotes.json
 ```
 
 This will crawl the site and save the scraped data into `quotes.json`.
+
+### Run the Playwright sample spider
+
+The project includes `basic_spider/spiders/js_playwright.py` which uses Playwright to render JS pages:
+
+```powershell
+scrapy crawl js_playwright -O items/js_playwright/test.json
+```
+
+If you see reactor errors, verify `TWISTED_REACTOR` is set to `twisted.internet.asyncioreactor.AsyncioSelectorReactor` in `basic_spider/settings.py`.
 
 ## Deploy & Manage with Scrapyd + ScrapydWeb
 

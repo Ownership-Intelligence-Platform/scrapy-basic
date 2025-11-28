@@ -35,3 +35,31 @@ FEEDS = {
 # Sensible defaults; can be overridden per-spider or via ScrapydWeb Additional settings.
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118 Safari/537.36"
 CONCURRENT_REQUESTS = 8
+
+# ---- Scrapy Playwright integration ----
+# Enable asyncio reactor for Playwright
+TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+
+# Use Scrapy Playwright download handlers for HTTP/HTTPS
+DOWNLOAD_HANDLERS = {
+    "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+    "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+}
+
+# Optional: choose browser type; can be overridden per-request via meta
+PLAYWRIGHT_BROWSER_TYPE = os.environ.get("PLAYWRIGHT_BROWSER_TYPE", "chromium")
+
+# Optional concurrency tuning for Playwright
+PLAYWRIGHT_LAUNCH_OPTIONS = {
+    "headless": True,
+}
+PLAYWRIGHT_CONTEXTS = {
+    "default": {
+        "accept_downloads": False,
+        "java_script_enabled": True,
+        # user_agent inherit from USER_AGENT unless overridden
+    }
+}
+
+# Reduce per-domain concurrency for JS-heavy sites to be polite
+CONCURRENT_REQUESTS_PER_DOMAIN = 4
