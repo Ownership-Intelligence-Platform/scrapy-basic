@@ -37,19 +37,19 @@ PASSWORD = ''
 # 详见 https://scrapyd.readthedocs.io/en/latest/config.html#example-configuration-file
 
 # - the string format: username:password@ip:port#group
-#   - The default port would be 8800 if not provided,
+#   - The default port would be 6800 if not provided,
 #   - Both basic auth and group are optional.
-#   - e.g. '0.0.0.0:8800' or 'username:password@localhost:6801#group'
+#   - e.g. '0.0.0.0:6800' or 'username:password@localhost:6801#group'
 # - the tuple format: (username, password, ip, port, group)
 #   - When the username, password, or group is too complicated (e.g. contains ':@#'),
 #   - or if ScrapydWeb fails to parse the string format passed in,
 #   - it's recommended to pass in a tuple of 5 elements.
-#   - e.g. ('', '', '0.0.0.0', '8800', '') or ('username', 'password', 'localhost', '6801', 'group')
+#   - e.g. ('', '', '0.0.0.0', '6800', '') or ('username', 'password', 'localhost', '6801', 'group')
 # Minimal local setup: keep only the local Scrapyd instance.
 # Start it first in a separate terminal with:  scrapyd
-# Add more servers later (e.g. 'user:pass@remotehost:8800#group').
+# Add more servers later (e.g. 'user:pass@remotehost:6800#group').
 SCRAPYD_SERVERS = [
-    '0.0.0.0:8800',
+    '127.0.0.1:6800',
 ]
 
 # The default is True, set it to False to skip checking connectivity of scrapyd at startup.
@@ -64,8 +64,8 @@ CHECK_SCRAPYD_SERVERS = False
 # If both ScrapydWeb and one of your Scrapyd servers run on the same machine,
 # ScrapydWeb would try to directly read Scrapy logfiles from disk, instead of making a request
 # to the Scrapyd server.
-# e.g. '0.0.0.0:8800' or 'localhost:6801', do not forget the port number.
-LOCAL_SCRAPYD_SERVER = '0.0.0.0:8800'
+# e.g. '0.0.0.0:6800' or 'localhost:6801', do not forget the port number.
+LOCAL_SCRAPYD_SERVER = '127.0.0.1:6800'
 
 # Enter the directory when you run Scrapyd, run the command below
 # to find out where the Scrapy logs are stored:
